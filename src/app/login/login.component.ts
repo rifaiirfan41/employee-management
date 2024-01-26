@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
+
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [FormsModule]
 })
+
 export class LoginComponent {
   username: string = '';
   password: string = '';
@@ -15,17 +21,32 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   login(): void {
-    // Hardcoded credentials for demonstration purposes
-    const validUsername = 'user';
-    const validPassword = 'password';
-
-    // Check if the entered credentials are valid
+    const validUsername = 'admin';
+    const validPassword = '12345678';
+    if (!this.username || !this.password) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Empty Fields',
+        text: 'Username dan password tidak boleh kosong.',
+      });
+      return;
+    }
     if (this.username === validUsername && this.password === validPassword) {
-      // Navigate to the employee-list page on successful login
       this.router.navigate(['/employee-list']);
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful!',
+        text: 'Sukses.',
+      });
+      this.loginFailed= false;
+
     } else {
-      // Display login failed message
       this.loginFailed = true;
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Credentials',
+        text: 'Periksa kembali username dan password anda.',
+      });
     }
   }
 }
