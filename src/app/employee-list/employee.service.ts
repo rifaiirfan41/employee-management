@@ -23,7 +23,6 @@ export class EmployeeService {
       { id: 15, nik: 332312312311, name: 'Aziz', position: 'Product Manager', salary: 100000 },
       { id: 16, nik: 332312312311, name: 'Irfan Rifai', position: 'Software Engineer', salary: 80000 },
       { id: 17, nik: 332312312311, name: 'Aziz', position: 'Product Manager', salary: 100000 },
-
     ];
 
     getEmployees(): Employee[] {
